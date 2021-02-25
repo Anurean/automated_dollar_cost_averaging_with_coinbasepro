@@ -34,17 +34,6 @@ buys['BTC-USD'] = {'buy': True, 'amount': 10.00}
 buys['ETH-USD'] = {'buy': False, 'amount': 0.00}
 buys['LTC-USD'] = {'buy': False, 'amount': 0.00}
 
-"""You can have the purchases you just made immediately withdrawn to your
-own wallets. Set the True/False variable and input your wallet on the
-address line.  """
-withdraws = {}
-withdraws['BTC-USD'] = {'withdraw': False,
-                        'address': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'}
-withdraws['ETH-USD'] = {'withdraw': False,
-                        'address': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'}
-withdraws['LTC-USD'] = {'withdraw': False,
-                        'address': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'}
-
 """ Don't modify anything under this line """
 cbpro_api = cbpro.AuthenticatedClient(cbpro_apikey,
                                       cbpro_secret,
@@ -66,16 +55,3 @@ def automated_purchase(event, context):
                                                  side='buy',
                                                  funds=buys[key]['amount'])
             time.sleep(2)
-            qty = float(cbpro_api.get_order(order['id'])['filled_size'])
-            withdraws[key]['qty'] = qty
-
-    # withdraw to wallets
-    withdraws['BTC-USD']['base'] = 'BTC'
-    withdraws['ETH-USD']['base'] = 'ETH'
-    withdraws['LTC-USD']['base'] = 'LTC'
-
-    for key in withdraws.keys():
-        if withdraws[key]['withdraw'] is True:
-            withdraw = cbpro_api.crypto_withdraw(amount=withdraws[key]['qty'],
-                       currency=withdraws[key]['base'],
-                       crypto_address=withdraws[key]['address'])
