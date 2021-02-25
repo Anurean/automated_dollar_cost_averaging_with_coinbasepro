@@ -55,4 +55,5 @@ def automated_purchase(event, context):
             order = cbpro_api.place_market_order(product_id=key,
                                                  side='buy',
                                                  funds=buys[key]['amount'])
+            print('order: {}'.format(order))
             time.sleep(2)
