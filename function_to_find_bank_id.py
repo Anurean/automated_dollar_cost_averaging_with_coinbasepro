@@ -4,7 +4,7 @@ Created on Mon Sep 23 19:33:37 2019
 
 @author: ben94
 
-This function is used only to determine the coinbase unique id number 
+This function is used only to determine the coinbase unique id
 for your bank account.
 
 From the Create Function screen in Google Cloud Console - Cloud Functions
@@ -15,14 +15,8 @@ Allow unauthenticated invocations: check
 Source Code: Inline editor
 Runtime: Python 3.xx
 Function to execute: print_cbpro_funding_accounts
-
-Delete all the example code in the main.py and requirements.txt window
-
-requirements.txt should be one word: cbpro
-
 """
 
-# past the next 14 lines into the main.py window
 import cbpro
 
 """ paste your coinbase api info into into the variables below within

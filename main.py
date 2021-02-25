@@ -14,13 +14,13 @@ cbpro_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 cbpro_passphrase = 'your_passphrase'
 
 """ Paste your bank account id into the funding_id variable.
-Input the deposit amount that should be requested every time this function 
-is run. The account id should be in quotes, the deposit amount should not. 
+Input the deposit amount that should be requested every time this function
+is run. The account id should be in quotes, the deposit amount should not.
 The deposit will initiate you run (or test) the function unless you set
 the initiate_deposit_when_run variable to False.
 Minimum coinbase deposit is $10.  Remember deposits on coinbase can take
 10 days, so purchases may fail the first time this runs unless you already
-have USD in your coinbase pro account. 
+have USD in your coinbase pro account.
 """
 initiate_deposit_when_run = True
 funding_id = 'XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXXXXXXX'
@@ -48,7 +48,8 @@ def automated_purchase(event, context):
                                         currency='USD',
                                         payment_method_id=funding_id)
         print('dep_request: {}'.format(dep_request))
-    # make purchases
+
+    # Make purchases
     for key in buys.keys():
         if buys[key]['buy'] is True:
             order = cbpro_api.place_market_order(product_id=key,
