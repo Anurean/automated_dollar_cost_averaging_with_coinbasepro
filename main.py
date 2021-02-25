@@ -12,6 +12,10 @@ import time
 cbpro_apikey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 cbpro_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 cbpro_passphrase = 'your_passphrase'
+""" To run your script against the sandbox (not production), set this to True
+Get API keys from https://public.sandbox.pro.coinbase.com/
+"""
+cbpro_sandbox = False
 
 """ Paste your bank account id into the funding_id variable.
 Input the deposit amount that should be requested every time this function
@@ -35,9 +39,11 @@ buys['ETH-USD'] = {'buy': False, 'amount': 0.00}
 buys['LTC-USD'] = {'buy': False, 'amount': 0.00}
 
 """ Don't modify anything under this line """
+cbpro_apiurl = "https://api-public.sandbox.pro.coinbase.com" if cbpro_sandbox else "https://api.pro.coinbase.com/"
 cbpro_api = cbpro.AuthenticatedClient(cbpro_apikey,
                                       cbpro_secret,
-                                      cbpro_passphrase)
+                                      cbpro_passphrase,
+                                      api_url=cbpro_apiurl)
 
 
 def automated_purchase(event, context):

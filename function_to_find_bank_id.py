@@ -24,13 +24,18 @@ the quote marks. """
 cbpro_apikey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 cbpro_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 cbpro_passphrase = 'your_passphrase'
-
+""" To run your script against the sandbox (not production), set this to True
+Get API keys from https://public.sandbox.pro.coinbase.com/
+"""
+cbpro_sandbox = False
 
 def print_cbpro_funding_accounts(requests):
 
+    cbpro_apiurl = "https://api-public.sandbox.pro.coinbase.com" if cbpro_sandbox else "https://api.pro.coinbase.com/"
     cbpro_api = cbpro.AuthenticatedClient(cbpro_apikey,
                                           cbpro_secret,
-                                          cbpro_passphrase)
+                                          cbpro_passphrase,
+                                          api_url=cbpro_apiurl)
 
     for funding_account in cbpro_api.get_payment_methods():
         print('the id number for {} is: {}'.format(funding_account['name'],
